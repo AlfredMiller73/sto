@@ -1,0 +1,101 @@
+{% extends "app/layout.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="impl_bread_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h1>Добавить статью</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+                        <li class="breadcrumb-item active">Новая статья</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="impl_blog_wrapper impl_blog_page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="impl_blog_inner">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3">
+                                <div class="impl_sidebar">
+                                    <div class="widget widget_recent_entries">
+                                        <h2 class="widget-title">Последние посты</h2>
+                                        <ul>
+                                        	{% for l in last %}
+                                            <li>
+                                                <div class="recent_cmnt_img">
+                                                    <img src="{{ l.image.url }}" alt="">
+                                                </div>
+                                                <div class="recent_cmnt_data">
+                                                    <h4><a href="{{ l.get_absolute_url }}">{{ l.title }}</a></h4>
+                                                    <span>{{ l.posted | date }}</span>
+                                                </div>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-9 impl_blog_section">
+                                <div class="row">
+                                    <div class="col-lg-10 col-md-12 offset-lg-1">
+                    <div class="impl_con_form">
+                        <div class="contact_map">
+                            <div id="contact_map"></div>
+                        </div>
+                        <div class="col-lg-12 col-md-12">
+                            <h1>Заполните все поля</h1>
+                        </div>
+                        <form method="POST" enctype="multipart/form-data">
+                        	{% csrf_token %}
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    {{ blogform.title }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    {{ blogform.description }}
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    {{ blogform.content }}
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    {{ blogform.author }}
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    {{ blogform.image }}
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    {{ blogform.posted }}
+                                </div>
+                            </div>
+                            <div class="response"></div>
+                            <div class="col-lg-12 col-md-12">
+                                <input type="hidden" name="form_type" value="contact">
+                                <button type="button" class="impl_btn submitForm">Сохранить статью</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

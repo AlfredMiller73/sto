@@ -1,0 +1,130 @@
+{% extends "app/layout.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="impl_bread_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h1>{{post_1.title}}</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'blog:blog' %}">Блог</a></li>
+                        <li class="breadcrumb-item active">пост № {{ post_1.id }}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------ Blog section Start ------>
+    <div class="impl_blog_wrapper impl_blog_page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="impl_blog_inner">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3">
+                                <div class="impl_sidebar">
+                                    <div class="widget widget_recent_entries">
+                                        <h2 class="widget-title">Недавние посты</h2>
+                                        <ul>
+                                        	{% for l in last %}
+                                            <li>
+                                                <div class="recent_cmnt_img">
+                                                    <img src="{{ l.image.url }}" alt="last">
+                                                </div>
+                                                <div class="recent_cmnt_data">
+                                                    <h4><a href="{{ l.get_absolute_url }}">{{ l.title }}</a></h4>
+                                                    <span>{{ l.posted | date }}</span>
+                                                </div>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-9 impl_blog_section">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="impl_blog_box single_blog">
+                                            <div class="impl_post_img">
+                                                <img src="{{ post_1.image.url }}" alt="blog" class="img-fluid" />
+                                                <span class="impl_pst_date">
+										{{ post_1.posted | date | truncatechars:9 }}
+									</span>
+                                            </div>
+                                            <div class="impl_post_data">
+                                                <h2>{{post_1.title}}</h2>
+                                                <p>{{post_1.content|linebreaksbr}}</p>
+                                                <div class="impl_pst_info impl_toppadder10">
+                                                    <div class="impl_pst_admin">
+                                                        <span>{{ post_1.author }} | </span>
+                                                        <span>{{ post_1.posted | date }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p><a href="{% url 'blog:blog' %}" class="impl_btn"> Назад </a></p>
+                                        </div>
+                                        <!--comments area start-->
+                                        <div class="comments-area">
+                                        	{% if comments %}
+                                            <div class="comments-area-title">
+                                                <h3 class="comments-title">Комментарии</h3>
+                                            </div>
+                                            
+                                            <ol class="commentlist">
+                                            	{% for comment in comments %}
+                                                <li class="comment">
+                                                    <div class="impl_comments">
+                                                        <div class="comment_img">
+                                                            <img src="{% static 'app/images/noimage.png' %}" width="100" height="100" alt="img">
+                                                        </div>
+                                                        <div class="comment_data">
+                                                            <div class="comment_data_info">
+                                                                <h3>{{comment.author}}</h3>
+                                                                <p class="cmnt_date">{{comment.date}}</p>
+                                                            </div>
+                                                            <p class="comment_para">
+                                                                {{comment.text|linebreaksbr}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                {% endfor %}
+                                            </ol>
+                                            {% else %}
+                                            <h3 id="reply-title" class="comments-title">Комментарии отсутствуют</h3>
+                                            <br /><br />
+                                            {% endif %}
+                                        </div>
+                                        {% if user.is_authenticated %}
+                                        <div class="comment-respond">
+                                            <h3 id="reply-title" class="comments-title">Оставить комментарий</h3>
+                                            <form method="POST">
+                                            	{% csrf_token %}
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <div class="comment_input_wrapper">
+                                                            {{ form.text }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <div class="comment-form-submit">
+                                                            <input name="submit" type="submit" id="comment-submit" class="submit impl_btn" value="Отправить">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        {% else %}
+    									<h3 id="reply-title" class="comments-title"> Для добавления своего комментария, пожалуйста, авторизуйтесь.</h3>
+										{% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

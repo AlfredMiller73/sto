@@ -1,0 +1,80 @@
+{% extends "app/layout.html" %}
+{% load staticfiles %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="impl_bread_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h1>Оформить заказ</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+                        <li class="breadcrumb-item active">Оформление заказа</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="impl_sell_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-md-12 offset-lg-1">
+                    <div class="impl_checkout_wrapper" id="impl_sform">
+						<div class="impl_step">
+                            <h2 class="step-title">Заполните все поля</h2>
+                            <form action="." method="post">
+                            <div class="row">
+                            		{% csrf_token %}
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                    	{{ form.first_name }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                    	{{ form.last_name }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                    	{{ form.email }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                    	{{ form.postal_code }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group form-group-txtarea">
+                                    	{{ form.address }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-group">
+                                    	{{ form.city }}
+                                    </div>
+                                </div>
+                                <button type="submit" name="next" class="next action-button impl_btn" value="Next" >Оформить</button>
+                            </div>
+                            </form>
+                        </div>
+                        	<div class="col-lg-12 col-md-12">
+                                        <div class="cart-subtotals">
+                                            <div class="total-line total_amounts">
+                                            	{% for item in cart  %}
+                                            	<p class="label text-left">Товар: {{ item.product.name | truncatewords:2 }}</p>
+                                            	<p class="label text-left">Количество: - {{ item.quantity }} шт.</p>
+                                                {% endfor %}
+                                            <span class="label">Итого:</span>
+                                        <span class="value price">{{ cart.get_total_price|floatformat:"2" }} руб.</span>
+                                    </div>
+                                </div>
+                        </div>
+					</div>
+                </div>
+            </div>
+        </div>
+</div>
+{% endif %}
+{% endblock %}

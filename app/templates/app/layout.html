@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	{% load staticfiles %}
+	<title>{{ title }} - станция технического обслуживания</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="STO">
+    <meta name="keywords" content="">
+    <meta name="author" content="hsoft">
+    <meta name="MobileOptimized" content="320">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/fonts.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/ion.rangeSlider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/ion.rangeSlider.skinFlat.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/magnific/magnific-popup.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/slick/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/slick/slick-theme.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/nice_select/nice-select.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/revolution/css/settings.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'app/images/log.ico' %}">
+</head>
+
+<body>
+	<div id="preloader">
+        <div id="status">
+            <img src="{% static 'app/images/log.png' %}" alt="" />
+            <div class="loader">
+                Loading...
+                <div class="ball"></div>
+                <div class="ball"></div>
+                <div class="ball"></div>
+            </div>
+        </div>
+    </div>
+    <div class="impl_header_wrapper">
+        <div class="impl_logo">
+            <a href="{% url 'home' %}"><img src="{% static 'app/images/log.png' %}" alt="Logo" width="70" height="70" class="img-fluid"></a>
+        </div>
+        <div class="impl_top_header text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="impl_top_info">
+                            <ul class="impl_header_social">
+							{% if user.is_authenticated %}
+								<li><p>Приветствуем {{ user.username }}!</p></li>
+								{% with total_items=cart|length %}
+								{% if cart|length > 0 %}
+								<li><p>Товаров в корзине - {{ total_items }}</p></li>
+								{% else %}
+								<li><p>Ваша корзина пуста</p></li>
+								{% endif %}
+								{% endwith %}
+								{% else %}
+                                <li><p>Приветствуем Гость!</p></li>
+							{% endif %}
+                            </ul>
+                            <p class="impl_header_time"><i class="fa fa-clock-o" aria-hidden="true"></i> Время работы - 18:00-23:00 | <span>Воскресенье - выходной</span></p>
+                            <ul class="impl_header_icons">
+							{% if user.is_authenticated %}
+                                <li class="cart-popup"><a href="{% url 'home' %}"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                                    <div class="cart-box">
+                                        <div class="popup-container">
+										{% for item in cart %}
+                        					{% with product=item.product %}
+                                            <div class="cart-entry">
+                                                <a href="{{ product.get_absolute_url }}" class="image">
+												<img src="{{ product.image.url }}" alt="product">
+											</a>
+                                                <div class="content">
+                                                    <a href="{{ product.get_absolute_url }}" class="title">{{ product.name }}</a>
+                                                    <p class="quantity">Количество: {{ item.quantity }}</p>
+                                                    <span class="price">{{ product.price }} руб.</span>
+                                                </div>
+                                                <div class="button-x">
+                                                    <a href="{% url "cart:CartRemove" product.id %}"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="summary">
+                                                <div class="subtotal">Итого:</div>
+                                                <div class="price-s">{{ item.total_price }} руб.</div>
+                                            </div>
+                                            {% endwith %}
+                    					{% endfor %}
+                                            <div class="cart-buttons">
+                                                <a href="{% url 'cart:CartDetail' %}" class="btn impl_btn">Корзина</a>
+                                                {% if cart|length > 0 %}
+                                                <a href="{% url 'order:OrderCreate' %}" class="btn impl_btn">Оформить</a>
+                                                {% endif %}
+                                                <div class="clear"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+								{% endif %}
+								{% if user.is_authenticated %}
+                                
+                                <li><a href="{% url 'logout' %}" title="Выход"><i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+								{% else %}
+								<li><a href="{% url 'login' %}">Вход</a> | <a href="{% url 'registration' %}">Регистрация</a></li>
+								{% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="impl_menu_wrapper text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <button class="impl_menu_btn">
+			<i class="fa fa-car" aria-hidden="true"></i>
+			<i class="fa fa-bars" aria-hidden="true"></i>
+		</button>
+                        <div class="impl_menu_inner text-center">
+                            <div class="impl_logo_responsive">
+                                <a href="/"><img src="{% static 'app/images/log.png' %}" width="70" height="70" alt="logo" class="img-fluid"></a>
+                            </div>
+                            <div class="impl_menu">
+                                <nav>
+                                    <div class="menu_cross">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </div>
+                                    <ul class="text-center">
+                                        <li><a href="{% url 'home' %}" class="active">Главная</a></li>
+                                        <li><a href="{% url 'about' %}">О нас</a></li>
+										<li><a href="{% url 'product:ProductList' %}">Каталог</a></li>
+										{% if user.is_authenticated %}
+										{% if user.is_staff %}
+										<li><a href="{% url 'userorders' %}">Мои заказы</a></li>
+										{% endif %}
+										<li><a href="{% url 'allorders' %}">Все заказы</a></li>
+										{% endif %}
+                                        <li class="dropdown"><a href="{% url 'services' %}">Услуги</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="{% url 'diagnost' %}">Компьютерная<br /><br />диагностика</a></li>
+                                                <li><a href="{% url 'to' %}">ТО автомобиля</a></li>
+                                                <li><a href="{% url 'dvs' %}">Капитальный<br /><br />ремонт ДВС</a></li>
+                                                <li><a href="{% url 'kompl' %}">Комплексная<br /><br />диагностика<br /><br />автомобиля</a></li>
+												<li><a href="{% url 'torm' %}">Тормозная система</a></li>
+												<li><a href="{% url 'ryl' %}">Рулевое управление</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown"><a href="{% url 'blog:blog' %}">Блог</a>
+										{% if user.is_superuser %}
+                                            <ul class="sub-menu">
+                                                <li><a href="{% url 'blog:newpost' %}">Добавить статью</a></li>
+                                            </ul>
+										{% endif %}
+                                        </li>
+                                        <li><a href="{% url 'contact' %}">Контакты</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% block content %}{% endblock %}
+
+<div class="impl_footer_wrapper">
+        <div class="impl_social_wrapper">
+            <ul>
+                <li><a href="https://fb.com"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="https://twitter.com"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                <li><a href="https://plus.google.com"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                <li><a href="https://youtube.com"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                <li><a href="https://pinterest.com"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                <li><a href="https://instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+        <div class="impl_foo_wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="impl_foo_box footer_abt_text">
+                            <p>В нашем автосервисе осуществляется техническое обслуживание различных марок легковых автомобилей. У нас имеется современное оборудование, которое позволяет предоставлять широкий спектр услуг, а также работает большое количество квалифицированных специалистов.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="impl_foo_box">
+                            <h1 class="impl_foo_title">Услуги</h1>
+                            <ul>
+                                <li><a href="{% url 'diagnost' %}"><i class="fa fa-angle-right" aria-hidden="true"></i> Компьютерная диагностика</a></li>
+                                <li><a href="{% url 'to' %}"><i class="fa fa-angle-right" aria-hidden="true"></i> ТО автомобиля</a></li>
+                                <li><a href="{% url 'dvs' %}"><i class="fa fa-angle-right" aria-hidden="true"></i> Капитальный ремонт ДВС</a></li>
+                                <li><a href="{% url 'kompl' %}"><i class="fa fa-angle-right" aria-hidden="true"></i> Комплексная диагностика</a></li>
+                                <li><a href="{% url 'torm' %}"><i class="fa fa-angle-right" aria-hidden="true"></i> Тормозная система</a></li>
+                                <li><a href="{% url 'ryl' %}"><i class="fa fa-angle-right" aria-hidden="true"></i> Рулевое управление</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="impl_foo_box">
+                            <h1 class="impl_foo_title">Контакты</h1>
+                            <ul>
+                                <li>
+                                    <div class="impl_foo_icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                                    <div class="impl_foo_text">
+                                        <p><a href="tel:+79922930732">+7(992)-293-07-32</a></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="impl_foo_icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                                    <div class="impl_foo_text">
+                                        <p>Псковская область<br>п. Локня.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="impl_foo_icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                    <div class="impl_foo_text">
+                                        <a href="mailto:stoloknya@yandex.ru">stoloknya@yandex.ru</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="impl_foo_box">
+                            <h1 class="impl_foo_title">Подпишитесь</h1>
+                            <p>И вы будете всегда в свете новых событий, происходящих в нашей мастерской.</p>
+                            <div class="impl_footer_subs">
+                                <input type="text" class="form-control" placeholder="Электронный адрес">
+                                <button class="foo_subs_btn"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="impl_btm_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+				<a href="{% url 'home' %}"><img src="{% static 'app/images/log.png' %}" width="70" height="70" alt="logo"></a>
+                    <p class="impl_copyright">Copyright &copy; {{ year }} STO <br /> Все права защищены.</p>
+                </div>
+            </div>
+        </div>		
+    </div>
+
+    <span class="gotop"><img src="{% static 'app/images/goto.png' %}" alt="goto"></span>
+    <script type="text/javascript" src="{% static 'app/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/popper.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/ion.rangeSlider.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/plugin/magnific/jquery.magnific-popup.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/plugin/slick/slick.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/plugin/nice_select/jquery.nice-select.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/jquery.themepunch.tools.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.extension.kenburn.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.extension.layeranimation.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.extension.navigation.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.extension.parallax.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.extension.slideanims.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.extension.actions.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.addon.slicey.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'app/js/custom.js' %}"></script>   
+	</body>
+</html>

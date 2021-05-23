@@ -1,0 +1,13 @@
+﻿
+{% extends "app/layout.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+    <h2>{{ title }}</h2>
+<a href ="https://quto.ru/" target="_blank"> <img src="{% static 'app/content/logo1.png' %}" alt="Logo 1"/></a></ul>
+<a href ="https://glades.ru/" target="_blank"> <img src="{% static 'app/content/logo2.png' %}" alt="Logo 1"/></a></ul>
+<a href ="https://autovogdenie.ru/" target="_blank"> <img src="{% static 'app/content/logo3.png' %}" alt="Logo 1"/></a></ul>
+
+{% endblock %}

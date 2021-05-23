@@ -1,0 +1,47 @@
+{% extends 'app/layout.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="impl_error_wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+                <div class="impl_sign_form">
+                    <h1 class="white">Вход</h1>
+                    <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Имя пользователя *</label>
+                        <br />
+                        {{ form.username }}
+                        <span class="form_icon">
+                        <br />
+						<i class="fa fa-envelope" aria-hidden="true"></i>
+					</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Пароль *</label>
+                        <br />
+                        {{ form.password }}
+                        <span class="form_icon">
+                        <br />
+					<i class="fa fa-lock" aria-hidden="true"></i>
+					</span>
+                    </div>
+                       
+                    <button class="impl_btn" type="submit">Войти</button>
+                         </form>
+                    <p class="white">Нет аккаунта? <a class="impl_modal" href="{% url 'registration' %}">Зарегистрируйтесь</a></p>
+                </div>
+                <div class="impl_sign_img">
+                    <h2>Добро пожаловать в СТО</h2>
+                    <p>Станция технического обслуживания</p>
+                    <div class="impl_sign_bottom">
+                        <h3>Качество</h3>
+                        <h3>Самые низкие цены</h3>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

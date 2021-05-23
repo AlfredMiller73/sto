@@ -1,0 +1,55 @@
+{% extends 'app/layout.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="impl_error_wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+                <div class="impl_sign_form">
+                    <h1 class="white">Регистрация</h1>
+                    <form method="POST">
+                    	{% csrf_token %}
+                    <div class="form-group">
+                    	<label>Имя пользователя *</label>
+                    	<br />
+                    	{{ regform.username }}
+                        <span class="form_icon">
+                        <br />
+						<i class="fa fa-user" aria-hidden="true"></i>
+					</span>
+                    </div>
+                    <div class="form-group">
+                    	<label>Пароль *</label>
+                    	<br />
+                    	{{ regform.password1 }}
+                        <span class="form_icon">
+                        <br />
+					<i class="fa fa-lock" aria-hidden="true"></i>
+					</span>
+                    </div>
+                    <div class="form-group">
+                    	<label>Повторите пароль *</label>
+                    	<br />
+                    	{{ regform.password2 }}
+                        <span class="form_icon">
+                        <br />
+					<i class="fa fa-lock" aria-hidden="true"></i>
+					</span>
+                    </div>
+                    <button type="submit" class="impl_btn" >Подтвердить</button>
+                    <p class="white">Есть аккаунт? <a class="impl_modal" href="{% url 'login' %}">Авторизуйтесь</a></p>
+                    </form>
+                </div>
+                <div class="impl_sign_img">
+                    <h2>Добро пожаловать в СТО</h2>
+                    <p>Станция технического обслуживания</p>
+                    <div class="impl_sign_bottom">
+                        <h3>Качество</h3>
+                        <h3>Самые низкие цены</h3>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

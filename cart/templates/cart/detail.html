@@ -1,0 +1,95 @@
+{% extends "app/layout.html" %}
+{% load staticfiles %}
+{% block title %}
+  Ваша корзина товаров
+{% endblock %}
+
+{% block content %}
+<div class="impl_bread_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h1>Корзина товаров</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+                        <li class="breadcrumb-item active">Корзина товаров</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="impl_sell_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-md-12 offset-lg-1">
+                    <div class="impl_checkout_wrapper" id="impl_sform">
+                    	{% if user.is_authenticated %}
+                    	{% if cart %}
+                        <ul id="step_progressbar">
+                            <li class="active"><span>Список товаров</span></li>
+                        </ul>
+                        <div class="impl_step">
+                            <div class="woocommerce">
+                                <form>
+                                    <table class="table table-bordered shop_table cart">
+										<thead>
+											<tr>
+												<th>Изображение</th>
+												<th>Товар</th>
+												<th>Количество</th>
+												<th>Цена</th>
+												<th>Всего</th>
+												<th>Удалить</th>
+											</tr>
+											{% for item in cart %}
+        									{% with product=item.product %}
+											<tr>
+												<td><a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" alt="prod"></a></td>
+												<td>{{ product.name }}</td>
+												<td>
+													{{ item.quantity }} | шт.
+												</td>
+												<td>{{ item.price }} руб.</td>
+												<td>{{ item.total_price }} руб.</td>
+												<td><a href="{% url "cart:CartRemove" product.id %}"><span class="cart_rmv_icon"><i class="fa fa-times" aria-hidden="true"></i></span></a></td>
+											</tr>
+											{% endwith %}
+    										{% endfor %}
+										</thead>
+                                    </table>
+                                    <div class="impl_cart_footer">
+                                        <div class="cart-subtotals">
+                                            <div class="total-line total_amount">
+                                                <span class="label">Итого:</span>
+                                                <span class="value price">{{ cart.get_total_price|floatformat:"2" }} руб.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <a href="{% url "product:ProductList"%}" class="next action-button impl_btn">В магазин</a>
+                            {% if cart|length > 0 %}
+                            <a href="{% url "order:OrderCreate" %}" class="next action-button impl_btn">Оформить</a>
+                            {% endif %}
+                        </div>
+                        {% else %}
+                        <div class="impl_print_rcpt">
+                            <h1>Ваша корзина пуста</h1>
+                            <p>Перейдите в магазин, чтобы добавить товары в корзину</p>
+                            <button class="impl_btn"><a href="{% url 'product:ProductList' %}">В магазин</a></button>
+                        </div>
+                        {% endif %}
+                        {% else %}
+                        <div class="impl_print_rcpt">
+                            <h1>Корзина не доступна</h1>
+                            <p>Для просмотра корзины Вам необходимо авторизоваться на сайте</p>
+                            <button class="impl_btn"><a href="{% url 'login' %}">Войти</a></button>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

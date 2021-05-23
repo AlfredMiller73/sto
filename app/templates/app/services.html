@@ -1,0 +1,84 @@
+{% extends "app/layout.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="impl_bread_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <h1>Услуги</h1>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+                        <li class="breadcrumb-item active">Услуги</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!------ Contact Wrapper Start ------>
+    <div class="impl_contact_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="impl_contact_info">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <div class="impl_contact_box">
+                                    <div class="impl_con_data">
+                                        <i class="fa fa-microchip" aria-hidden="true"></i>
+                                        <h2>Компьютерная диагностика</h2>
+                                        <p><a class="impl_btn" href="{% url 'kompl' %}">Узнать больше</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="impl_contact_box">
+                                    <div class="impl_con_data">
+                                        <i class="fa fa-car" aria-hidden="true"></i>
+                                        <h2>ТО автомобиля<br /><br /></h2>
+                                        <p><a class="impl_btn" href="{% url 'to' %}">Узнать больше</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 impl_bottompadder80">
+                                <div class="impl_contact_box">
+                                    <div class="impl_con_data">
+                                        <i class="fa fa-gear" aria-hidden="true"></i>
+                                        <h2>Капитальный ремонт ДВС</h2>
+                                        <p><a class="impl_btn" href="{% url 'dvs' %}">Узнать больше</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="impl_contact_box">
+                                    <div class="impl_con_data">
+                                        <i class="fa fa-gears" aria-hidden="true"></i>
+                                        <h2>Комплексная диагностика</h2>
+                                        <p><a class="impl_btn" href="{% url 'diagnost' %}">Узнать больше</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="impl_contact_box">
+                                    <div class="impl_con_data">
+                                        <i class="fa fa-tachometer" aria-hidden="true"></i>
+                                        <h2>Тормозная система<br /><br /></h2>
+                                        <p><a class="impl_btn" href="{% url 'torm' %}">Узнать больше</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="impl_contact_box">
+                                    <div class="impl_con_data">
+                                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                                        <h2>Рулевое управление<br /><br /></h2>
+                                        <p><a class="impl_btn" href="{% url 'ryl' %}">Узнать больше</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
