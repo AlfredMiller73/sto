@@ -9,18 +9,18 @@
     <meta name="keywords" content="">
     <meta name="author" content="hsoft">
     <meta name="MobileOptimized" content="320">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/fonts.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/font-awesome.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/ion.rangeSlider.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/ion.rangeSlider.skinFlat.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/magnific/magnific-popup.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/slick/slick.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/slick/slick-theme.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/nice_select/nice-select.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/revolution/css/settings.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}">
-    <link rel="shortcut icon" type="image/png" href="{% static 'app/images/log.ico' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/fonts.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/ion.rangeSlider.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/ion.rangeSlider.skinFlat.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/magnific/magnific-popup.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/slick/slick.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/slick/slick-theme.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/nice_select/nice-select.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/js/plugin/revolution/css/settings.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'app/images/log.ico' %}" />
 </head>
 
 <body>
@@ -131,9 +131,9 @@
                                         <li><a href="{% url 'about' %}">О нас</a></li>
 										<li><a href="{% url 'product:ProductList' %}">Каталог</a></li>
 										{% if user.is_authenticated %}
-										{% if user.is_staff %}
 										<li><a href="{% url 'userorders' %}">Мои заказы</a></li>
 										{% endif %}
+                                        {% if user.is_staff %}
 										<li><a href="{% url 'allorders' %}">Все заказы</a></li>
 										{% endif %}
                                         <li class="dropdown"><a href="{% url 'services' %}">Услуги</a>
@@ -146,13 +146,7 @@
 												<li><a href="{% url 'ryl' %}">Рулевое управление</a></li>
                                             </ul>
                                         </li>
-                                        <li class="dropdown"><a href="{% url 'blog:blog' %}">Блог</a>
-										{% if user.is_superuser %}
-                                            <ul class="sub-menu">
-                                                <li><a href="{% url 'blog:newpost' %}">Добавить статью</a></li>
-                                            </ul>
-										{% endif %}
-                                        </li>
+                                        <li class="dropdown"><a href="{% url 'blog:blog' %}">Блог</a></li>
                                         <li><a href="{% url 'contact' %}">Контакты</a></li>
                                     </ul>
                                 </nav>
@@ -248,22 +242,23 @@
     </div>
 
     <span class="gotop"><img src="{% static 'app/images/goto.png' %}" alt="goto"></span>
-    <script type="text/javascript" src="{% static 'app/js/jquery.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/popper.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/ion.rangeSlider.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/plugin/magnific/jquery.magnific-popup.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/plugin/slick/slick.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/plugin/nice_select/jquery.nice-select.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/jquery.themepunch.tools.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.extension.kenburn.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.extension.layeranimation.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.extension.navigation.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.extension.parallax.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.extension.slideanims.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.extension.actions.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/plugin/revolution/js/revolution.addon.slicey.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'app/js/custom.js' %}"></script>   
+    <script src="{% static 'app/js/jquery.js' %}"></script>
+    <script src="{% static 'app/js/popper.js' %}"></script>
+    <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'app/js/ion.rangeSlider.min.js' %}"></script>
+    <script src="{% static 'app/js/plugin/magnific/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'app/js/plugin/slick/slick.min.js' %}"></script>
+    <script src="{% static 'app/js/plugin/nice_select/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'app/js/plugin/revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
+    <script src="{% static 'app/js/plugin/revolution/js/jquery.themepunch.tools.min.js' %}"></script>
+    <script src="{% static 'app/js/plugin/revolution/js/revolution.extension.kenburn.min.js' %}"></script>
+    <script src="{% static 'app/js/plugin/revolution/js/revolution.extension.layeranimation.min.js' %}"></script>
+    <script src="{% static 'app/js/plugin/revolution/js/revolution.extension.navigation.min.js' %}"></script>
+    <script src="{% static 'app/js/plugin/revolution/js/revolution.extension.parallax.min.js' %}"></script>
+    <script src="{% static 'app/js/plugin/revolution/js/revolution.extension.slideanims.min.js' %}"></script>
+    <script src="{% static 'app/js/plugin/revolution/js/revolution.extension.actions.min.js' %}"></script>
+    <script src="{% static 'app/js/plugin/revolution/js/revolution.addon.slicey.min.js' %}"></script>
+    <script src="{% static 'app/js/custom.js' %}"></script>   
+    {% block scripts %}{% endblock %}
 	</body>
 </html>

@@ -31,12 +31,12 @@
                                         <h2 class="widget-title">Категории</h2>
                                         <ul>
                                             <li {% if not category %} class="selected" {% endif %}>
-									      <a href="{% url "product:ProductList" %}">Все</a>
-									    </li>
+									            <a href="{% url "product:ProductList" %}">Все</a>
+									        </li>
 									    {% for cat in categories %}
-									      <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
-									        <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
-									      </li>
+									        <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+									            <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+									        </li>
 									    {% endfor %}
                                         </ul>
                                     </div>

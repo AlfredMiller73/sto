@@ -102,7 +102,6 @@ def registration(request):
         'cart': cart,
         'year':datetime.now().year,
         }
-
 )
 
 def anketa(request):

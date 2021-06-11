@@ -4,7 +4,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>sto</Name>
     <RootNamespace>sto</RootNamespace>
-    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|env1|$(MSBuildProjectFullPath)</InterpreterId>
     <TestFramework>Pytest</TestFramework>
   </PropertyGroup>
   <PropertyGroup>
@@ -444,6 +444,8 @@
     <Content Include="blog\templates\blog\blogpost.html" />
     <Content Include="blog\templates\blog\newpost.html" />
     <Content Include="cart\templates\cart\detail.html" />
+    <Content Include="db.sqlite3" />
+    <Content Include="media\7.jpg" />
     <Content Include="order\templates\admin\detail.html" />
     <Content Include="order\templates\order\create.html" />
     <Content Include="order\templates\order\created.html" />
@@ -451,7 +453,6 @@
     <Content Include="product\templates\product\detail.html" />
     <Content Include="product\templates\product\list.html" />
     <Content Include="requirements.txt" />
-    <Content Include="db.sqlite3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.html">
@@ -459,6 +460,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="env1\">
+      <Id>env1</Id>
+      <Version>3.6</Version>
+      <Description>env1 (Python 3.6 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
     <Interpreter Include="env\">
       <Id>env</Id>
       <Version>3.7</Version>

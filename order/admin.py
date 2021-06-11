@@ -9,7 +9,7 @@ import datetime
 
 def OrderDetail(obj):
     return format_html('<a href="{}">Посмотреть</a>'.format(
-        reverse('orders:AdminOrderDetail', args=[obj.id])
+        reverse('order:AdminOrderDetail', args=[obj.id])
     ))
 OrderDetail.short_description = 'Инфо'
 

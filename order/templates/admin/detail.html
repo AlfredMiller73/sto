@@ -9,8 +9,8 @@
 {% block breadcrumbs %}
 <div class="breadcrumbs">
   <a href="{% url "admin:index" %}">Главная</a> &rsaquo;
-  <a href="{% url "admin:orders_order_changelist" %}">Заказы</a> &rsaquo;
-  <a href="{% url "admin:orders_order_change" order.id %}">Заказ {{ order.id }}</a> &rsaquo;
+  <a href="{% url "admin:order_order_changelist" %}">Заказы</a> &rsaquo;
+  <a href="{% url "admin:order_order_change" order.id %}">Заказ {{ order.id }}</a> &rsaquo;
   Детали
 </div>
 {% endblock %}
